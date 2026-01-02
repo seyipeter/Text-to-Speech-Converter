@@ -19,9 +19,10 @@ function populateVoiceList() {
         }
         option.setAttribute("data-lang", voice.lang);
         option.setAttribute("data-name", voice.name);
-        newDOMChanges.appendChild(option);   
+        newDOMChanges.appendChild(option); 
+        voiceSelect.appendChild(newDOMChanges);
     }
-    voiceSelect.appendChild(newDOMChanges);
+    
 }
 if (synth.onvoiceschanged !== undefined) {
     synth.onvoiceschanged = populateVoiceList;
@@ -46,6 +47,7 @@ function preventingIntSubmit(event) {
     inputText.blur();
 };
 triggerButton.addEventListener('click', preventingIntSubmit);
+
 
 
 
