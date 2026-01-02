@@ -2,33 +2,31 @@ const synth = window.speechSynthesis;
 
 const triggerButton = document.querySelector('button');
 const inputText = document.querySelector('textarea');
-
 const voiceSelect = document.querySelector('select');
 
 let voices = [];
-
 function populateVoiceList() {
-
     voices = synth.getVoices();
     voiceSelect.innerHTML = "";
+    const newDOMChanges = document.createElementFragment(); /* 
+     Creates a document fragments to hold new changes to the DOM i.e the new elements created
+    */
 
     for (const voice of voices) {
-
         const option = document.createElement('option');
         option.textContent = `${voice.name} (${voice.lang})`;
-
+        
         if (voice.default) {
             option.textContent += " — DEFAULT";
         }
-
         option.setAttribute("data-lang", voice.lang);
         option.setAttribute("data-name", voice.name);
-        voiceSelect.appendChild(option);
-
+        newDOMChanges.appendChild(option); /*
+        stores the new element in the document fragement before storing it in the select dropdown         
+        */      
     }
+    voiceSelect.appendChild(newDOMChanges);
 }
-
-
 if (synth.onvoiceschanged !== undefined) {
     synth.onvoiceschanged = populateVoiceList;
 }
@@ -40,7 +38,6 @@ function preventingIntSubmit(event) {
     if(!inputText.value){return;}
 
     const utterThis = new SpeechSynthesisUtterance(inputText.value);
-
     const selectedVoiceOption = voiceSelect.selectedOptions[0].getAttribute('data-name');
     const selectedLangOption = voiceSelect.selectedOptions[0].getAttribute('data-lang');
     const chosenVoice = voices.find(v => v.name === selectedVoiceOption);
@@ -50,10 +47,10 @@ function preventingIntSubmit(event) {
     }    
     synth.cancel();
     synth.speak(utterThis);
-
     inputText.blur();
 };
 triggerButton.addEventListener('click', preventingIntSubmit);
+
 
 
 
