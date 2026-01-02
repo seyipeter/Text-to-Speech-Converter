@@ -7,6 +7,7 @@ const voiceSelect = document.querySelector('select');
 let voices = [];
 function populateVoiceList() {
     voices = synth.getVoices();
+    const dom-changes = document.createDocumentFragment();
     voiceSelect.innerHTML = "";
         
     for (const voice of voices) {
@@ -18,9 +19,9 @@ function populateVoiceList() {
         }
         option.setAttribute("data-lang", voice.lang);
         option.setAttribute("data-name", voice.name);
-        voiceSelect.appendChild(option);
+        dom-changes.appendChild(option);        
     }
-    
+    voiceSelect.appendChild(dom-changes);    
 }
 if (synth.onvoiceschanged !== undefined) {
     synth.onvoiceschanged = populateVoiceList;
@@ -45,6 +46,7 @@ function preventingIntSubmit(event) {
     inputText.blur();
 };
 triggerButton.addEventListener('click', preventingIntSubmit);
+
 
 
 
