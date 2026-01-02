@@ -8,10 +8,8 @@ let voices = [];
 function populateVoiceList() {
     voices = synth.getVoices();
     voiceSelect.innerHTML = "";
-    const newDOMChanges = document.createElementFragment(); /* 
-     Creates a document fragments to hold new changes to the DOM i.e the new elements created
-    */
-
+    const newDOMChanges = document.createElementFragment(); 
+    
     for (const voice of voices) {
         const option = document.createElement('option');
         option.textContent = `${voice.name} (${voice.lang})`;
@@ -21,9 +19,7 @@ function populateVoiceList() {
         }
         option.setAttribute("data-lang", voice.lang);
         option.setAttribute("data-name", voice.name);
-        newDOMChanges.appendChild(option); /*
-        stores the new element in the document fragement before storing it in the select dropdown         
-        */      
+        newDOMChanges.appendChild(option);   
     }
     voiceSelect.appendChild(newDOMChanges);
 }
@@ -50,6 +46,7 @@ function preventingIntSubmit(event) {
     inputText.blur();
 };
 triggerButton.addEventListener('click', preventingIntSubmit);
+
 
 
 
