@@ -5,11 +5,12 @@ const inputText = document.querySelector('textarea');
 const voiceSelect = document.querySelector('select');
 
 let voices = [];
+
 function populateVoiceList() {
     voices = synth.getVoices();
-    const dom-changes = document.createDocumentFragment();
     voiceSelect.innerHTML = "";
-        
+
+    const domchanges = document.createDocumentFragment();        
     for (const voice of voices) {
         const option = document.createElement('option');
         option.textContent = `${voice.name} (${voice.lang})`;
@@ -21,7 +22,7 @@ function populateVoiceList() {
         option.setAttribute("data-name", voice.name);
         dom-changes.appendChild(option);        
     }
-    voiceSelect.appendChild(dom-changes);    
+    voiceSelect.appendChild(domchanges);    
 }
 if (synth.onvoiceschanged !== undefined) {
     synth.onvoiceschanged = populateVoiceList;
@@ -46,6 +47,7 @@ function preventingIntSubmit(event) {
     inputText.blur();
 };
 triggerButton.addEventListener('click', preventingIntSubmit);
+
 
 
 
