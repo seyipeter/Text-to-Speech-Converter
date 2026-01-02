@@ -43,13 +43,17 @@ function preventingIntSubmit(event) {
 
     const selectedOption = voiceSelect.selectedOptions[0].getAttribute('data-name');
 
-   utterThis.voice = voices.find(v => {v.name === selectedOption});
+   const voiceChosen = voices.find(v => {v.name === selectedOption});
+   utterThis.voice = voiceChosen;
+   utterThis.lang = voiceChosen.lang;
 
+    synth.cancel();
     synth.speak(utterThis);
 
     inputText.blur();
 };
 triggerButton.addEventListener('click', preventingIntSubmit);
+
 
 
 
