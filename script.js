@@ -20,7 +20,7 @@ function populateVoiceList() {
         }
         option.setAttribute("data-lang", voice.lang);
         option.setAttribute("data-name", voice.name);
-        dom-changes.appendChild(option);        
+        domchanges.appendChild(option);        
     }
     voiceSelect.appendChild(domchanges);    
 }
@@ -47,6 +47,7 @@ function preventingIntSubmit(event) {
     inputText.blur();
 };
 triggerButton.addEventListener('click', preventingIntSubmit);
+
 
 
 
