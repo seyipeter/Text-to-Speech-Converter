@@ -10,6 +10,7 @@ let voices = [];
 function populateVoiceList() {
 
     voices = synth.getVoices();
+    voiceSelect.innerHTML = "";
 
     for (const voice of voices) {
 
@@ -36,21 +37,20 @@ populateVoiceList();
 function preventingIntSubmit(event) {
     event.preventDefault();
 
+    if(!inputText.value){return;}
+
     const utterThis = new SpeechSynthesisUtterance(inputText.value);
 
     const selectedOption = voiceSelect.selectedOptions[0].getAttribute('data-name');
 
-    for (const voice of voices) {
-        if (voice.name === selectedOption) {
-            utterThis.voice = voice;
-        }
-    }
+   utterThis.voice = voices.find(v => {v.name === selectedOption});
 
     synth.speak(utterThis);
 
     inputText.blur();
 };
 triggerButton.addEventListener('click', preventingIntSubmit);
+
 
 
 
