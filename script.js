@@ -41,18 +41,20 @@ function preventingIntSubmit(event) {
 
     const utterThis = new SpeechSynthesisUtterance(inputText.value);
 
-    const selectedOption = voiceSelect.selectedOptions[0].getAttribute('data-name');
-
-   const voiceChosen = voices.find(v => {v.name === selectedOption});
-   utterThis.voice = voiceChosen;
-   utterThis.lang = voiceChosen.lang;
-
+    const selectedVoiceOption = voiceSelect.selectedOptions[0].getAttribute('data-name');
+    const selectedLangOption = voiceSelect.selectedOptions[0].getAttribute('data-lang');
+    const chosenVoice = voices.find(v => v.name === selectedVoiceOption);
+    if(chosenVoice){
+    utterThis.voice = chosenVoice;
+    utterThis.lang =  selectedLangOption;
+    }    
     synth.cancel();
     synth.speak(utterThis);
 
     inputText.blur();
 };
 triggerButton.addEventListener('click', preventingIntSubmit);
+
 
 
 
